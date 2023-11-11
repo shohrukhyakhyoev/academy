@@ -1,0 +1,136 @@
+.showcase {
+    margin: 50px auto;
+    padding: 0 200px;
+    display: flex;
+    flex-direction: column;
+}
+
+.question hr {
+    margin: 30px 0;
+}
+
+.question .top {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.question .top .title {
+    font-size: 1.3em;
+}
+
+.question .top .user-time-info {
+    font-size: 0.9em;
+}
+
+.question .content {
+    font-size: 1em;
+}
+
+.tags {
+    margin-top: 25px;
+}
+
+.q_comments {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin: 30px 0;
+}
+
+.q_comments p {
+    font-size: 0.9em;
+    padding: 8px 0;
+    color: gray;
+}
+
+.q_comment-text-form {
+    height: 90px;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+.answers .top {
+    font-size: 1.3em;
+    margin-top: 50px;
+}
+
+.answers .content {
+    font-size: 1em;
+    margin-bottom: 30px;
+}
+
+.answers .bottom {
+    font-size: 0.9em;
+    margin: 25px 0;
+}
+
+.answers .hr {
+    margin-top: 30px;
+}
+
+.a_comments {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.a_comments p {
+    font-size: 0.9em;
+    padding: 8px 0;
+    color: gray
+}
+
+.acommentform {
+    display: none;
+}
+
+.a_comment-text-form {
+    height: 90px;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+.q_comments a, .answers a {
+    color: dodgerblue;
+}
+
+.post-answer {
+    margin: 30px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.post-answer .title {
+    font-size: 1.3em;
+}
+
+.post-answer 
+
+.post-answer .error {
+    margin-top: 10px;
+    color: red;
+}
+
+.post-answer form input[type="submit"] {
+    margin-top: 20px;
+}
+
+@media(max-width: 800px) {
+    .showcase {
+        width: 350px;
+        padding: 0 40px;
+        display: block;
+    }
+
+    .q_comment-text-form, .a_comment-text-form {
+        height: 100px;
+        width: 200px;
+        border-radius: 5px;
+        padding: 5px 10px;
+    }
+
+
+}

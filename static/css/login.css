@@ -1,0 +1,44 @@
+.reg {
+    width: 400px;
+    margin: 80px auto;
+}
+
+.reg h3 {
+    font-size: 1.5em;
+}
+
+.reg form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 40px 0;
+}
+
+.reg form input[type="submit"] {
+    margin: 0;
+}
+
+.reg p {
+    margin: 20px 0;
+}
+
+.reg form input[type="email"], input[type="password"], input[type="text"] {
+    padding: 10px 15px;
+    font-size: 1.1em;
+    border-radius: 5px;
+    margin: 5px 0 20px;
+    border: 2px solid black;
+} 
+
+.navbar .filter {
+    display: none;
+}
+
+
+@media(max-width:800px) {
+    .reg {
+        width: 300px;
+    }
+
+}
+

@@ -1,0 +1,12 @@
+<nav class="navbar">
+    <h3><a href="/">Academic Support</a></h3>    
+    <form class="filter" method="get" action="">
+        <input class="search" name="{{search_request_var}}" value="{{search_query}}" type="search" placeholder="Search ...">
+        <input type="submit" name="" hidden>
+    </form>
+    {% if request.user.is_authenticated %}
+        <a href="/community/logout" class="btn blue">Logout</a>
+    {% else %}
+        <a href="/community/login" class="btn blue">Login</a>
+    {% endif %}
+</nav>

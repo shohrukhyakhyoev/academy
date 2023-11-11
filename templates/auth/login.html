@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/questions.css'%}">
+    <link rel="stylesheet" href="{% static 'css/community.css'%}">
+    <link rel="stylesheet" href="{% static 'css/login.css'%}">
+
+{% endblock %}
+
+{% block title %}
+    <title>Login</title>
+{% endblock %}
+
+{% block content %}
+
+    {% include 'community/nav.html' %}
+
+    <div class="container reg">
+
+        <h3>Login</h3>
+
+        {% if form.errors %}
+            {% for error in form.errors.values %}
+                p>{{error}}</p>
+            {% endfor %}
+        {% endif %}
+
+        
+        <form method="post" action="">
+            {% csrf_token %}
+            {{ form.username }}
+            {{ form.password }}
+            <input class="btn" type="submit" value="Login">
+            <p class="signup-link">Not a member yet? <a href="../signup">Signup now</a></p>
+        </form>
+
+    </div>
+
+
+
+
+{% endblock %}

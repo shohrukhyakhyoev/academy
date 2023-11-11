@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/contact.css'%}">
+{% endblock %}
+
+{% block title %}
+    <title>Contact</title>
+{% endblock %}
+
+{% block content %}
+
+    {% include 'header.html' %}
+
+    <div class="container contact">
+        <p>Address: 8 Ziyolilar Street, Tashkent, Uzbekistan</p>
+        <p>Telegram bot: <a href="https://t.me/AcademicHelp_bot" target="_blank">@AcademicHelp_bot</a></p>
+        <p>Email: acsupiut@gmail.com</p>
+    </div>
+
+
+{% endblock %}

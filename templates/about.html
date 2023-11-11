@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/about.css'%}">
+{% endblock %}
+
+{% block title %}
+    <title>About club</title>
+{% endblock %}
+
+{% block content %}
+
+    {% include 'header.html' %}
+
+    <div class="container about">
+
+        <img src="{% static 'images/about.png'%}" alt="">
+
+        <p>Academic Support Club has been founded to build a collaborative learning environment in our university. Here you can get a help in several ways: watching forum.</p>
+        <p>Content is made by students like you! So if you think you have something to share, our team is always open for new friends.</p>
+
+        <p>Our mission is to create a collaborative community among students. We believe sharing what we know ourselves, discussing problems together & giving hints massively speeds up our studies and brings a huge joy in our journey.</p>
+        <p>We are looking forward to your support. Let's bring together our Collaboration up to the next level.</p>
+    </div>
+
+
+
+
+{% endblock %}

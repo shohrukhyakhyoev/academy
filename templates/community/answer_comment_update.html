@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/question.css'%}">
+    <link rel="stylesheet" href="{% static 'css/community.css'%}">
+    <link rel="stylesheet" href="{% static 'css/answer_comment_update.css'%}">
+{% endblock %}
+
+{% block title %}
+    <title>Update Answer Comment</title>
+{% endblock %}
+
+{% block content %}
+
+    {% include 'community/nav.html' %}
+
+    <div class="container comment-update">
+
+        <p class="title">Update Comment</p>
+
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input class="btn blue" type="submit" value="Edit Comment">
+        </form>
+
+    </div>
+
+{% endblock %}

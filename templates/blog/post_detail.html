@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/post_detail.css'%}">
+{% endblock %}
+
+{% block title %}
+    <title>{{ post.title }}</title>
+{% endblock %}
+
+{% block content %}
+
+    {% include 'header.html' %}
+
+    <div class="container post">
+        <div class="top">
+            <p class="title">{{ post.title }}</p>
+            <p class="overview">{{ post.overview }}</p>
+            <p class="author">Posted by {{ post.author }} on {{ post.timestamp | date }} - <span><a class="edit" href="{% url 'post_update' post.pk post.slug%}">Edit </a></span> / 
+                <span><a class="delete" href="{% url 'post_delete' post.pk post.slug%}"> Delete</a></span>
+            </p>
+        </div>
+        
+        <!-- <img src="{{ post.thumbnail.url }}" alt="post-thumbnail"> -->
+
+        <p class="content">{{ post.content | safe }}</p>
+
+    </div>
+
+
+{% endblock %}

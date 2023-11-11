@@ -1,0 +1,32 @@
+.header {
+    margin-top: 20px;    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    background-color: white;
+    position: sticky;
+    top: 0;
+    padding: 0 40px;
+
+}
+
+ul {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+
+.header h3 {
+    font-size: 1.4em;
+}
+
+ul li a {
+    font-size: 1.1em;
+}
+
+@media(max-width: 800px) {
+    .hide {
+        display: none;
+    }
+}

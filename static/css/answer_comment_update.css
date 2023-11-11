@@ -1,0 +1,29 @@
+.comment-update {
+    width: 400px;
+    margin: 100px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 50px; 
+}
+
+.title {
+    font-size: 1.2em;
+}
+
+.a_comment-text-form {
+    height: 200px;
+    width: 350px;
+    margin-bottom: 50px;
+}
+
+@media(max-width: 900px) {
+
+   
+    .a_comment-text-form {
+        height: 100px;
+        width: 300px;
+        border-radius: 5px;
+        padding: 5px 10px;
+        margin-bottom: 25px;
+    }
+}

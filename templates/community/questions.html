@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/questions.css'%}">
+    <link rel="stylesheet" href="{% static 'css/community.css'%}">
+{% endblock %}
+
+{% block title %}
+    <title>Forum</title>
+{% endblock %}
+
+{% block content %}
+
+    {% include 'community/nav.html' %}
+
+    <div class="container">
+        <div class="welcome">
+            <h2>Studying’s better with buddies.</h1>
+            <p>Solve problems together with <span>Academic Support Community.</span></p>
+        </div>
+    </div>
+
+    <div class="showcase">
+
+        <div class="left-card">
+            <p>Tags</p>
+            <div>
+                {% for tag in tags %}
+                    <a href="?{{search_request_var}}={{tag}}" class="btn tag">{{tag}}</a>
+                {% endfor %}   
+            </div>
+        </div>
+
+        <div class="main-card">
+
+            {% if questions %}
+                <div class="filter-cards">
+                    <a href="?{{tag_request_var}}=Latest" class="filter-card">Latest</a>
+                    <a href="?{{tag_request_var}}=Active" class="filter-card">Active</a>
+                    <a href="?{{tag_request_var}}=Unanswered" class="filter-card">Unaswered</a>
+                    <a href="?{{tag_request_var}}=Answered" class="filter-card">Answered</a>
+                </div>
+
+                {% for question in questions %}
+                    <div class="question">
+                        <h4><a href="{% url 'question' question.pk question.slug %}">{{ question.title }}</a></h4>
+                        <p>{{ question.content|slice:"150" | safe }}</p>
+                        <div class="bottom">
+                            <div class="tags">
+                                {% for tag in question.tag.all %}
+                                    <a href="?{{ search_request_var }}={{ tag }}" class="btn tag">{{ tag }}</a>
+                                {% endfor %}
+                            </div>
+                            <p><span>{{question.user}} </span> asked {{ question.timestamp | timesince}} ago</p>
+                        </div>
+                    </div>
+                {% endfor %}
+
+                <div class="pagination">
+                    {% if questions.has_previous %}
+                        <a href="?{{ page_request_var }}={{ questions.previous_page_number }}&{{ search_request_var }}={{ search_query }}">
+                            <i class="fas fa-chevron-left fa-sm"></i></a>
+                    {% endif %}
+                        <a href="?{{ page_request_var }}={{ questions.number }}&{{ search_request_var }}={{ search_query }}">{{ questions.number }}</a>
+                    {% if questions.has_next %}
+                        <a href="?{{ page_request_var }}={{ questions.next_page_number }}&{{ search_request_var }}={{ search_query }}">
+                            <i class="fas fa-chevron-right fa-sm"></i> </a>
+                    {% endif %}
+                </div>
+
+            {% else %}
+                <h4 style="margin: 10px auto;">No questions found.</h4>
+            {% endif %}    
+        </div>
+
+        <div class="right-sidebar">
+
+            {% if not request.user.is_authenticated %}
+                <div class="card right">
+                    <div class="top">
+                        <h4>Good Day</h4>
+                        <img src="{% static 'images/hand.png' %}" alt="hand">
+                    </div>
+                    <p>Welcome to the Academic Support Club Community</p>
+                    <p>Connect, share, and engage with community.</p>
+                    <a href="/community/signup" class="btn ">Join the community</a>
+                </div>
+            {% else %}
+            <div class="card right">
+                <div class="top">
+                    <h4>Good Day</h4>
+                    <img src="{% static 'images/hand.png' %}" alt="hand">
+                </div>
+                <p>Find it difficult to solve a problem? Then why don't you ask a help from our members?</p>
+                <p>We are here to help you!</p>
+                <div class="buttons">
+                    <a href="../question/create" class="btn ">Ask Question</a>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+    </div>
+
+{% endblock %}

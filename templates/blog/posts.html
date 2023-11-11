@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/tutorials.css'%}">
+{% endblock %}
+
+{% block title %}
+    <title>Posts</title>
+{% endblock %}
+
+{% block content %}
+
+    {% include 'header.html' %}
+
+    <!-- <div class="container posts">
+
+        <h3>Posts</h3>
+
+        {% if posts %}
+            <div class="items">
+                {% for post in posts %}
+                    <div class="card">
+                        <img src="{{ post.thumbnail.url }}" alt="">
+                        <p class="title"><a href="{% url 'post_detail'  pk=post.pk slug=post.slug %}">{{ post.title }}</a></p>
+                        <p class="overview">{{ post.overview }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="pagination">
+                {% if questions.has_previous %}
+                    <a href="?{{ page_request_var }}={{ posts.previous_page_number }}">
+                        <i class="fas fa-chevron-left fa-sm"></i></a>
+                {% endif %}
+                    <a href="?{{ page_request_var }}={{ questions.number }}">{{ posts.number }}</a>
+                {% if posts.has_next %}
+                    <a href="?{{ page_request_var }}={{ questions.next_page_number }}">
+                        <i class="fas fa-chevron-right fa-sm"></i> </a>
+                {% endif %}
+            </div>
+
+        {% endif %}
+
+    </div> -->
+
+    <div class="container objects">
+
+        <p class="head">Posts</p>
+
+        <form>
+            <input class="search" name="{{search_request_var}}" value="{{search_query}}" type="search" placeholder="Search ...">
+            <input type="submit" name="" hidden>
+        </form>
+        {% for post in posts %}
+            <div class="post">
+                <img src="{{ post.thumbnail.url }}" alt="">
+                <div class="details">
+                    <p class="title">{{ post.title }}</p>
+                    <div class="overview">{{ post.overview }}</div>
+                    <div class="btns">
+                        <a href="{% url 'post_detail' post.pk post.slug %}"><button class="btn link">View</button></a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+        <div class="pagination">
+            {% if tutorials.has_previous %}
+                <a href="?{{ page_request_var }}={{ questions.previous_page_number }}&{{ search_request_var }}={{ search_query }}">
+                    <i class="fas fa-chevron-left fa-sm"></i></a>
+            {% endif %}
+                <a href="?{{ page_request_var }}={{ questions.number }}&{{ search_request_var }}={{ search_query }}">{{ tutorials.number }}</a>
+            {% if tutorials.has_next %}
+                <a href="?{{ page_request_var }}={{ questions.next_page_number }}&{{ search_request_var }}={{ search_query }}">
+                    <i class="fas fa-chevron-right fa-sm"></i> </a>
+            {% endif %}
+        </div>
+
+    </div>
+
+
+
+
+{% endblock %}

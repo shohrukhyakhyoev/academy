@@ -1,0 +1,30 @@
+.posts {
+    margin: 50px auto;
+
+}
+
+.posts .items {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin: 50px auto;
+}
+
+.posts h3 {
+    font-size: 1.4em;
+}
+
+.items .card .title {
+    font-size: 1.2em;
+    padding: 0 10px;
+}
+
+.items .card .overview {
+    font-size: 1em;
+    padding: 0 10px;
+}
+
+@media(max-width: 800px) {
+    .posts .items {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/questions.css'%}">
+    <link rel="stylesheet" href="{% static 'css/community.css'%}">
+    <link rel="stylesheet" href="{% static 'css/question_create.css'%}">
+{% endblock %}
+
+{% block title %}
+    <title>Update Question</title>
+{% endblock %}
+
+{% block content %}
+
+    {% include 'community/nav.html' %}
+
+    <div class="container ask-question">
+        {% if login_required %}
+            <h6>{{ login_required }} Please, <a href="/community/login?next=../question/ask"> log in.</a></h5>
+        {% elif authority_error %}
+            <h6>{{ authority_error }}</h6>
+        {% elif error %}
+            <h4>Errors:</h4>
+            {% for key, value in error.items %}
+                <h6>{{key}} : {{ value }}</h6>
+            {% endfor %}
+        {% else %}
+            <div class="details">
+                <h3>Ask Question</h3>
+                {{ form.media }}
+                <form class="form" method="post" action="" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        {{ field.label }}:
+                        <div class="form-item">
+                            {{ field }}
+                        </div>
+                    {% endfor %}
+                    <input class="btn" type="submit" value="Submit">
+                </form>
+            </div>
+        {% endif %}
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/post_delete.css'%}">
+{% endblock %}
+
+{% block title %}
+    <title>Delete Post</title>
+{% endblock %}
+
+{% block content %}
+
+    {% include 'header.html' %}
+
+    <div class="container post_delete">
+        {% if authority_error %}
+            <h4>{{ authority_error }}</h4>
+        {% elif login_required %}
+            <h4>{{ login_required }}</h4>
+        {% else %}
+
+        <div class="delete">
+            <h3>Delete Post</h3>
+            <form class="form" method="post">
+                {% csrf_token %}
+                <p>Are you sure to delete the post - <a href="{% url 'post_detail'  pk=post.pk slug=post.slug %}">{{ post.title }}</a>? Confirm clicking the button.</p>
+                <input class="btn red" type="submit" value="Submit">
+            </form>
+
+        </div>
+            
+        {% endif %}
+
+    </div>
+
+{% endblock %}
+

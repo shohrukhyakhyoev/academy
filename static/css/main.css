@@ -1,0 +1,233 @@
+.index .main {
+    height: 400px;
+    width: 100%;
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 100px;
+    justify-content: center; 
+    align-items: center;
+}
+
+.index .main .info {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 30px 0;
+    justify-content: center;
+    align-items: center;
+}
+
+.index .main .info p {
+    font-size: 1.2em;
+}
+
+.index .main img {
+    width: 100%;
+    height: 100%
+}
+
+.index .main .buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-left: -20px;
+}
+
+.message {
+    margin: 100px auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+}
+
+.message .quote {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+    gap: 50px;
+}
+
+.message .quote .btn {
+    width: 90px;
+}
+
+.message .quote h3 {
+    font-size: 1.3em;
+    line-height: 30px;
+}
+
+.message .founder {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.message .founder .author {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    align-items: center;
+}
+
+.message .founder .author .infos {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.message .founder .author .infos p {
+    font-size: 1em;
+}
+
+.message .founder .author img {
+    width: 100px;
+    height: 100px;
+    border-radius: 100px;
+}
+
+.statistics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-left: 10px;
+}
+
+.statistics .stat .number {
+    font-size: 1.4em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.supporter {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.supporter img {
+    width: 50px;
+    height: 50px;
+    border-radius: 100px;
+}
+
+.ways {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    margin: 150px auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.ways .title {
+    font-size: 1.3em;
+}
+
+.way {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+}
+
+.way .details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 20px;
+}
+
+.way p {
+    line-height: 20px;
+}
+
+.way .details a {
+    width: 160px;
+    text-align: center;
+}
+
+.head {
+    text-align: center;
+}
+
+.ask-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    margin-left: 50px;
+}
+
+.ask-box img {
+    width: 100%;
+    height: 100%
+}
+
+.ask-box .info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 50px;
+}
+
+.ask-box .info .btn {
+    width: 120px;
+}
+
+
+.questions {
+    margin: 100px auto;
+}
+
+.filter {  
+    padding: 5px 8px;
+    font-size: 0.8em;
+}
+
+.questions .head {
+    margin-bottom: 50px;
+    font-size: 1.3em;
+}
+
+@media(max-width: 800px) {
+    .index .main img {
+        display: none;
+    }
+
+    .index .main {
+        grid-template-columns: 1fr;
+    }
+
+    .index .main .buttons {
+        margin-left: -40px;
+    }
+
+    .message {
+        grid-template-columns: 1fr;
+    }
+
+    .message .quote {
+        gap: 30px;
+    }
+
+    .ways img {
+        display: none;
+    }
+
+    .way {
+        grid-template-columns: 1fr;
+    }
+
+    .ask-box {
+        grid-template-columns: 1fr; 
+        margin-left: 0;
+        justify-content: center;
+    }
+
+    .ask-box img {
+        display: none;
+    }
+
+}

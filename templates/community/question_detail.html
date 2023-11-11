@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/question.css'%}">
+    <link rel="stylesheet" href="{% static 'css/community.css'%}">
+    <script src="{% static 'js/question.js' %}"></script>
+{% endblock %}
+
+{% block title %}
+    <title>{{ question.title }}</title>
+{% endblock %}
+
+{% block content %}
+
+    {% include 'community/nav.html' %}
+
+    <div class="container showcase">
+
+        <div class="question">
+            <div class="top">
+                <p class="title">{{ question.title }}</p>
+                <p class="user-time-info"><span>{{question.user}} </span> asked {{ question.timestamp | timesince}} ago</p>
+            </div>
+
+            <hr>
+
+            <p class="content">{{ question.content | safe }}</p>
+
+            <div class="tags">
+                {% for tag in question.tag.all %}
+                    <a href="?{{ search_request_var }}={{ tag }}" class="btn tag">{{ tag }}</a>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="q_comments">
+
+            <div class="comments">
+                {% for comment in question.get_comments %}
+                    <hr>
+                    {% if request.user == comment.user %}
+                        <p><span id="q{{ comment.pk }}" >{{ comment.text }}</span> - <span>{{ comment.user }}</span> 
+                            commented {{ comment.timestamp | timesince }} ago</span>, 
+                            <a><button>
+                                <i name="q{{ comment.pk }}" id="qc-edit" onclick="q_comment_edit()" class="fa-solid fa-pen-to-square"></i>
+                            </button></a>
+                        </p>
+                    {% else %}
+                        <p><span>{{ comment.text }}</span> - <span>{{ comment.user }}</span> 
+                            commented {{ comment.timestamp | timesince }} ago</span>
+                        </p>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            
+            <form method="POST">
+                {% csrf_token %}
+                {{ question_comment_form.as_p }}
+                <input class="btn blue" type="submit" id="q-comment-button" name="questionComment" value="Add Comment">
+                <input type="hidden" value="" id="q-comment-id" name="question_comment_id">
+            </form>
+            
+
+        </div>
+
+
+        {% if question.get_answers %}
+            <div class="answers">
+
+                <p class="top">Answers</p>
+                
+                {% for answer in question.get_answers %}
+                    <p class="content">{{ answer.content | safe }}</p>
+
+                    {% if request.user == answer.user %}
+                        <p class="bottom"><span>{{ answer.user }}</span> answered
+                            {{ answer.timestamp | timesince }} ago</span>, 
+                            <a href="{% url 'edit_answer' answer.id %}"><button>
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </button></a>
+                        </p>
+                    {% else %}
+                        <p class="bottom"><span>{{ answer.user }}</span> answered <span>{{ answer.timestamp | timesince }} ago</span></p>
+                    {% endif %}
+                    
+                    <div class="a_comments">
+
+                        <div class="comments">
+                            {% for comment in answer.get_comments %}
+                                <hr>
+                                {% if request.user == comment.user %}
+                                    <p><span>{{ comment.text }}</span> - <span>{{ comment.user }}</span> 
+                                        commented {{ comment.timestamp | timesince }} ago</span>,
+                                        <a href="{% url 'edit_answer_comment' comment.pk %}" ><button>
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                        </button></a>
+                                    </p>
+                                {% else %}
+                                    <p><span>{{ comment.text }}</span> - <span>{{ comment.user }}</span> 
+                                        commented {{ comment.timestamp | timesince }} ago</span>
+                                    </p>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        
+                        <form method="POST">
+                            {% csrf_token %}
+                            {{ answer_comment_form.as_p }}
+                            <input class="btn blue" type="submit" value="Add Comment">
+                            <input type="hidden" name="answer_id" value="{{ answer.pk }}">
+                        </form>
+        
+                    </div>
+
+                    <!-- <hr class="hr"> -->
+
+                {% endfor %}
+
+            </div>
+        {% endif %}
+
+        {% if request.user != question.user %}
+            <div class="post-answer">
+                <p class="title">Your Answer</p>
+
+                <form method="POST">
+                    {{ answer_form.media }}
+                    {% csrf_token %}
+                    {{ answer_form.as_p }}
+
+                    <div class="bottom">
+                        {% if not request.user.is_authenticated %}
+                            <p class="error">*Please, log in to post answer!</p>
+                        {% else %}
+                            <input type="hidden" name="answer_pk" value="">
+                            <input class="btn blue" type="submit" name="answer" value="Post Answer">
+                        {% endif %}
+                    </div>
+                </form>
+
+            </div>
+        {% endif%}
+
+    </div>
+
+
+
+{% endblock %}

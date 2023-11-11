@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/tutorials.css'%}">
+{% endblock %}
+
+{% block title %}
+    <title>Tutorials</title>
+{% endblock %}
+
+{% block content %}
+
+    {% include 'header.html' %}
+
+    <div class="container objects">
+
+        <p class="head">Tutorials</p>
+
+        <form>
+            <input class="search" name="{{search_request_var}}" value="{{search_query}}" type="search" placeholder="Search ...">
+            <input type="submit" name="" hidden>
+        </form>
+        {% for tutorial in tutorials %}
+            <div class="object">
+                <img src="{{ tutorial.thumbnail.url }}" alt="">
+                <div class="details">
+                    <p class="title">{{ tutorial.title }}</p>
+                    <div class="overview">{{ tutorial.overview }}</div>
+                    <div class="btns">
+                        <a class="tag" href="?{{search_request_var}}={{tutorial.category}}">{{ tutorial.category }}</a>
+                        <a href="{{tutorial.url}}"><button class="btn link" href="{{tutorial.url}}">View</button></a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+        <div class="pagination">
+            {% if tutorials.has_previous %}
+                <a href="?{{ page_request_var }}={{ questions.previous_page_number }}&{{ search_request_var }}={{ search_query }}">
+                    <i class="fas fa-chevron-left fa-sm"></i></a>
+            {% endif %}
+                <a href="?{{ page_request_var }}={{ questions.number }}&{{ search_request_var }}={{ search_query }}">{{ tutorials.number }}</a>
+            {% if tutorials.has_next %}
+                <a href="?{{ page_request_var }}={{ questions.next_page_number }}&{{ search_request_var }}={{ search_query }}">
+                    <i class="fas fa-chevron-right fa-sm"></i> </a>
+            {% endif %}
+        </div>
+
+    </div>
+
+
+
+{% endblock %}

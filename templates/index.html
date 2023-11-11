@@ -1,0 +1,171 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/main.css'%}">
+    <link rel="stylesheet" href="{% static 'css/tutorials.css'%}">
+    <link rel="stylesheet" href="{% static 'css/community.css'%}">
+
+    <link rel="stylesheet" href="{% static 'css/questions.css'%}">
+
+
+{% endblock %}
+
+{% block title %}
+    <title>Academic Support Club</title>
+{% endblock %}
+
+{% block content %}
+
+    {% include 'header.html' %}
+
+
+    <div class="container index">
+
+        <div class="main">
+            <div class="info">
+                <h2>Free online tutorials, with students like you.</h2>
+                <p>Watch comprehensive tutorials and join our community to boost your study pace.</p>
+                <div class="buttons">
+                    <a href="/tutorials" class="btn blue">Start Learning</a>
+                    <a href="/community/questions" class="btn">Get Live Help</a>
+                </div>
+            </div>
+            
+            <img src="{%static 'images/main-page.webp' %}" alt="main-image">
+        </div>
+
+        
+        <div class="message">
+            <div class="quote">
+                <p>FROM THE FOUNDER OF <span>ACADEMIC SUPPORT CLUB</span></p>
+                <h3>We are a group of students with the mission of building a collaborative learning environment.</h3>
+                <a href="/about" class="btn blue">About</a>
+            </div>
+
+            <div class="founder">
+
+                <div class="author">
+                    <img src="{% static 'images/person.jpg' %}" alt="founder">
+                    <div class="infos">
+                        <p>Founded by Shohrukhbek Yakhyoev</p>
+                        <p>Head of Academic Support Club</p>
+                    </div>
+                </div>
+
+                <div class="statistics">
+                    <div class="stat">
+                      <div class="number">700+</div> 
+                      <p>Learners</p>
+                    </div>
+                    <div class="stat">
+                      <div class="number">70+</div>
+                      <p>Sessions</p>
+                    </div>
+                    <div class="stat">
+                      <div class="number">1</div>
+                      <p>Official Partner</p>
+                    </div>
+                </div>
+
+                <div class="supporter">
+                    <img src="{% static 'images/inha.png' %}" alt="inha">
+                    <div class="text-3">INHA University in Tashkent</div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="ways">
+            <p class="title">Ways to Learn</p>
+            <div class="way">
+                <img src="{% static 'images/video.jpg' %}" alt="online-video">
+                <div class="details">
+                    <h3>Watch tutorials to prep for Quizes & Exams.</h3>
+                    <p>Find it difficult to grasp everything in lectures? No worries, we are here to help you. Choose subject and watch tutorials. Most of them do have additional 
+                      resources provided for your further research.</p>
+                    <a href="/tutorial" class="btn blue">Explore Tutorials</a>  
+                </div>  
+            </div>
+            <div class="way">
+                <div class="details">
+                    <h3>Ask questions in our forum.</h3>
+                    <p>Join our forum! There you can ask, asnwer a question and leave comments. Discussing problems together helps you understand
+                        the problem better. Do not hesitate to ask: it is better to do so rather than wasting time!
+                    </p>
+                    <a href="/community/questions" class="btn blue">Explore Forum</a>  
+                </div>  
+                <img src="{% static 'images/question.webp' %}" alt="question">
+            </div>
+        </div>
+
+        <div class="objects">
+            <p class="head">Latest Tutorials</p>
+    
+            {% for tutorial in tutorials %}
+                <div class="object">
+                    <img src="{{ tutorial.thumbnail.url }}" alt="">
+                    <div class="details">
+                        <p class="title">{{ tutorial.title }}</p>
+                        <div class="overview">{{ tutorial.overview }}</div>
+                        <div class="btns">
+                            <a class="tag" href="?{{search_request_var}}={{tutorial.category}}">{{ tutorial.category }}</a>
+                            <a href="{{tutorial.url}}"><button class="btn link" href="{{tutorial.url}}">View</button></a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+       <div class="ask-box">
+            <div class="info">
+                <h3>Join Our Community</h3>
+                <p>Ask questions, help your friends and discuss problems in comments. Join us & bring your collaboration up to the next level.</p>
+                <a href="community/questions/" class="btn">Learn More</a>
+            </div>
+            <img src="{% static 'images/forum.jpeg' %}" alt="forum">
+        </div>
+
+        <div class="questions">
+            <p class="head">Latest Questions</p>
+            {% for question in questions %}
+                <div class="question">
+                    <h4><a href="{% url 'question' question.pk question.slug %}">{{ question.title }}</a></h4>
+                    <p>{{ question.content|slice:"150" | safe }}</p>
+                    <div class="bottom">
+                        <div class="tags">
+                            {% for tag in question.tag.all %}
+                                <button class="btn filter">{{ tag }}</button>
+                            {% endfor %}
+                        </div>
+                        <p><span>{{question.user}} </span> asked {{ question.timestamp | timesince}} ago</p>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+
+        <div class="objects">
+            <p class="head">Latest Posts</p>
+    
+            {% for post in posts %}
+                <div class="post">
+                    <img src="{{ post.thumbnail.url }}" alt="">
+                    <div class="details">
+                        <p class="title">{{ post.title }}</p>
+                        <div class="overview">{{ post.overview }}</div>
+                        <div class="btns">
+                            <a href="{% url 'post_detail' post.pk post.slug %}"><button class="btn link">View</button></a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    
+
+    </div>
+
+    
+
+{% endblock %}

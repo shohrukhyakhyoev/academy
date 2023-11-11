@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/post_create.css'%}">
+{% endblock %}
+
+{% block title %}
+    <title>Create Post</title>
+{% endblock %}
+
+{% block content %}
+
+    {% include 'header.html' %}
+
+    <div class="container post-create">
+        {% if authority_error %}
+            <h4>{{ authority_error }}</h4>
+        {% elif login_required %}
+            <h4>{{ login_required }} Please, <a href="/community/login?next=../question/ask"> log in.</a></h4>
+        {% else %}
+
+        <div class="post-form">
+            <h3>Create Post</h3>
+            <form class="form" method="post" action="" enctype="multipart/form-data">
+                {{ form.media }}
+                {% csrf_token %}
+                {% for field in form %}
+                    <div>
+                        {{ field }}
+                    </div>
+                {% endfor %}
+                <input class="btn" type="submit" value="Submit">
+            </form>
+
+        </div>
+            
+        {% endif %}
+
+    </div>
+    
+
+
+{% endblock %}
